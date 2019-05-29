@@ -34,7 +34,8 @@ use RegistersUsers;
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('guest');
     }
 
@@ -51,7 +52,7 @@ use RegistersUsers;
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:6', 'confirmed'],
             ]);
-            dd($data);
+            //dd($data);
     }
 
     /**

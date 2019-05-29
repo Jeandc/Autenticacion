@@ -18,10 +18,14 @@ class LoginController extends Controller
             $this->username() => 'email|required|string',
             $this->getAuthPassword() => 'required|string'
         ]);
+
     //dd($credentials);
         if (Auth::attempt($credentials))
         {
-            return view ('home');
+            $user = auth::user();
+            $user->save();
+            return view ('welcome');
+
         }
         return back()
             ->withErrors(['email' =>  trans('auth.failed')])

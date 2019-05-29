@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth.login');
 });
+Route::view('/', 'welcome');
+
+
 
 // Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -27,14 +30,18 @@ Route::post('register', 'Auth\RegisterController@register');
   }
         // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+//Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+//Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+//Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 
         // Rutas para estatus
-Route::post('statuses', 'StatusesController@store')->name('statuses.store');
+Route::post('statuses', 'StatusesController@store')->name('statuses.store')->middleware('auth');
+
+Route::post('/', function () {
+    return 'foo';
+});
         //usuario
 //Route::post('usuario', 'usuarioController@store')->name('usuario.store');
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
